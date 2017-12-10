@@ -1,0 +1,49 @@
+<% include header %>
+
+
+ <div class="col-md-9">
+    <div class="col-md-12 page-body">
+    	<div class="row"> 
+            <div class="sub-title">
+           		<a href="/index"><h2>Назад на главную</h2></a>
+                <a href="#comment" class="smoth-scroll"><i class="icon-bubbles"></i></a>
+             </div>
+            
+            <div class="col-md-12 content-page">             
+               
+                <!-- Blog Post Start -->
+                <div class="col-md-12 blog-post">
+	            <!-- Post Headline Start -->
+                <div class="post-title">
+                    <h1> <%= post.postTitle %></h1> 
+                 </div>
+                   <!-- Post Headline End -->
+                  
+
+                    <div class="post-info">
+                    	<span>by <a href="contact" target="_blank">Yurchuk Bohdan</a></span>
+                    </div> 
+
+					<!-- Post description START  -->
+	
+					<p><%= post.postDescription%></p>
+
+					<!-- Post description END  -->
+
+
+                     <!-- Post content START  -->
+                    <div class="post__content">
+                      <%= post.postContent %>
+                    </div>
+                    <!-- Post content END  -->
+                                    
+                </div>
+                <!-- Blog Post End -->
+                             
+                
+             </div>
+              
+         </div>
+
+
+<% include footer %>

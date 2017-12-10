@@ -1,0 +1,20 @@
+{
+    "author": "Bohdan Yurchuck",
+    "dependencies": {
+        "body-parser": "^1.18.2",
+        "ejs": "^2.5.7",
+        "express": "^4.16.2",
+        "md5": "^2.2.1",
+        "mongodb": "~2.2",
+        "nodemailer": "^4.4.0",
+        "nodemon": "^1.12.1"
+    },
+    "description": "",
+    "license": "ISC",
+    "main": "index.js",
+    "name": "devblog",
+    "scripts": {
+        "start": "nodemon app.js"
+    },
+    "version": "1.0.0"
+}

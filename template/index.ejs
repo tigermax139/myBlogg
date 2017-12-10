@@ -1,0 +1,46 @@
+<% include header %>
+
+                 <!-- Blog Post (Right Sidebar) Start -->
+ <div class="col-md-9">
+    <div class="col-md-12 page-body">
+    	<div class="row"> 
+            <div class="sub-title">
+           		<h2>My Blogg</h2>
+                <a href="contact"><i class="icon-envelope"></i></a>
+             </div>
+            
+            <div class="col-md-12 content-page">
+            	
+                
+               
+                <!-- Blog Post Start -->
+                <% posts.forEach((post, index) => { %>
+                <div class="col-md-12 blog-post">
+                    <div class="post-title">
+                      <a href="single/<%= post._id %>"><h1>
+                          <%= post.postTitle %>
+                      </h1></a>
+                    </div>  
+                    <div class="post-info">
+                    	<span>by <a href="contact" target="_blank">Yurchuk Bohdan</a></span>
+                    </div>  
+                    <p><%= post.postDescription%></p>
+                    <a href="single/<%= post._id %>" class="button button-style button-anim fa fa-long-arrow-right"><span>Читать дальше...</span></a>
+                </div>
+                <% }); %>
+                <!-- Blog Post End -->
+                
+               
+                
+                <div class="col-md-12 text-center">
+                 <a href="javascript:void(0)" id="load-more-post" class="load-more-button">Load</a>
+                 <div id="post-end-message"></div>
+                </div>
+                
+             </div>
+              
+         </div>
+         
+<% include form_subscribe %>
+                                      
+<% include footer%>
