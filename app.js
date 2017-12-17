@@ -20,7 +20,7 @@ const ADMIN = {
 
 
 //don't forget change to FALSE!!!!!!
-let isAdmin = true;
+let isAdmin = false;
 
 // View engine setup
 app.set('views', __dirname + '/template');
@@ -210,7 +210,6 @@ app.post('/login', (req, res) => {
 		login: `${req.body.login}`,
 		password: `${req.body.password}`
 	};
-	console.log("user:" + user.login + ' ' + user.password);
 
 	if(	user.login == ADMIN.login && md5(user.password) == ADMIN.password){
 		isAdmin = true;
@@ -340,11 +339,23 @@ app.post('/edit/:id', (req, res) => {
             	res.redirect('/posts');
         });
     });
-
 });
 
+app.get('/delete/:id', (req, res) => {
 
+	let id = new objectId(req.params.id);
 
+	MongoClient.connect(urlDB, (err, db) => {
+		db.collection("posts").remove({_id: id}, (err, post) =>{
+			if(err) {
+				console.log(err);
+				return res.status(400).send();
+			}
+			db.close();
+			res.redirect('/posts');
+		});
+	});
+});
 
 
 app.get('/delete', (req, res) => {

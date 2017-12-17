@@ -96,7 +96,13 @@
 <!-- LOGIN START -->
                   <div class="login">
                     <form action="login" method="post">
-                      <h2><%= msg %></h2>
+
+
+                       <% if(status == true ){ %>
+                         <h2><%= msg %></h2>
+                   <% } else { %>     
+                      <h3><%= msg %></h3>
+
                       <label for="" class="form-group">
                         <span>Login</span>
                         <input class="form-control" type="text" id="login" name="login">
@@ -109,7 +115,7 @@
 
                       </label>
                       <input class="form-control load-more-button" type="submit" value=" GO ">
-
+                        <% } %>
                     </form>
                   </div>
 <!-- LOGIN END -->   

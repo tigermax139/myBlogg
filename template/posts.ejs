@@ -101,16 +101,11 @@
            <th><%= index + 1 %></td>
            <td><%= post.postTitle %></td>
            <td><a href="/edit/<%= post._id %>">Редагувати</a></td>
-           <td><a href="/delete/<%= post._id %>">Видалити</a></td>
+           <td><a onclick="return confirm('Видалити пост?');"  href="/delete/<%= post._id %>">Видалити</a></td>
           </tr>
          <% }); %>
 </table>
-
-
-
-
 <!-- DELETE END -->
-
                          </div>
                         </div>
                        </div>
@@ -152,7 +147,23 @@
     
     <!-- Main Javascript File  -->
     <script type="text/javascript" src="../js/scripts.js"></script>
+    <script type="text/javascript">
+      function confirm (event){
+              function handleLink(href) {
+                var isLeaving = confirm('Стерти пост?');
+                if (!isLeaving) return false;
+              }
 
+              var target = event.target;
+
+              while (target != this) {
+                if (target.nodeName == 'A') {
+                  return handleLink(target.getAttribute('href'));
+                }
+                target = target.parentNode;
+              }
+            } 
+    </script>
     
    </body>
  </html>
