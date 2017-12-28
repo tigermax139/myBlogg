@@ -98,28 +98,28 @@ app.post('/subscribe', (req, res) => {
 		};
 		db.collection('contacts').find(subscriber).toArray((err, result) =>{
 
+			if(err) {
+				console.log(err);
+				res.sendStatus(500);
+			} 
 			//test
 			console.log(result);
+			console.log(result.length);
 			// console.log(subscriber);
 			console.log( '*************' );
 			console.log( result != [] );
 			console.log( '*************' );
 			console.log( result == [] );
 			console.log( '*************' );
-			console.log( result === [] );			
+			console.log( result === [] );	
 
-
-			if(err) {
-				console.log(err);
-				res.sendStatus(500);
-			} 
-			if( result != [] ){
+			if(Array.isArray(result)&&result.length>0){
 				res.render('subscribe', {
 					msg: `${subscriber.email}`,
 					status: false
 				});
 				db.close();
-			}else if( result == [] ){
+			}else {
 				db.collection('contacts').insert(subscriber, (err, result) => {
 				if(err) {
 					console.log(err);
@@ -131,20 +131,10 @@ app.post('/subscribe', (req, res) => {
 					});
 				db.close();
 				});
-			}else {
-				res.render('subscribe', {
-					msg: false,
-					status: false
-					});
-				db.close();
-			}
+			}		
 		});
 	});
 });
-
-
-/*
-
 
 app.post('/send', (req, res) => {
 	const output = `
@@ -172,7 +162,10 @@ app.post('/send', (req, res) => {
         	// якщо не входить, то сгенерувати новий акаунт на сайті
             user: 'd2g245pccerqjxjh@ethereal.email', // generated ethereal user
             pass: 'yMbeNzcfQaRs2ysHeu'  // generated ethereal password
-        }
+        },
+        tls: { //самозавіряючий сертифікат, щоб нод  не сварився
+        	rejectUnauthorized: false
+    	}
     });
 
     // setup email data with unicode symbols
@@ -203,9 +196,6 @@ app.post('/send', (req, res) => {
     });
 });
 // NODEMAILER-----------------------END--------------------------------------//
-
-
-*/
 
 
 
