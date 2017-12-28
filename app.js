@@ -8,7 +8,7 @@ const app = express();
 /*****************MONGO DB  *****************************/
 const MongoClient = require('mongodb').MongoClient;
 const urlDB = 'mongodb://admin:aunion67@ds129936.mlab.com:29936/blog';
-let objectId = require('mongodb').ObjectID;
+const objectId = require('mongodb').ObjectID;
 /**MONGO END**/
 
 
@@ -17,7 +17,6 @@ const ADMIN = {
 	password: '8134b84030cca5285ed0e0b31ba06f10'
 }
 // 8134b84030cca5285ed0e0b31ba06f10
-
 
 //don't forget change to FALSE!!!!!!
 let isAdmin = false;
@@ -58,7 +57,7 @@ app.get('/index', function (req, res) {
 
 app.get('/single/:id', (req, res) => {
 
-	let id = new objectId(req.params.id);
+	const id = new objectId(req.params.id);
 
 	MongoClient.connect(urlDB, (err, db) => {
 		db.collection("posts").findOne({_id: id}, (err, post) =>{
@@ -98,6 +97,18 @@ app.post('/subscribe', (req, res) => {
 			email: req.body.subscriberEmail
 		};
 		db.collection('contacts').find(subscriber).toArray((err, result) =>{
+
+			//test
+			console.log(result);
+			// console.log(subscriber);
+			console.log( '*************' );
+			console.log( result != [] );
+			console.log( '*************' );
+			console.log( result == [] );
+			console.log( '*************' );
+			console.log( result === [] );			
+
+
 			if(err) {
 				console.log(err);
 				res.sendStatus(500);
@@ -108,7 +119,7 @@ app.post('/subscribe', (req, res) => {
 					status: false
 				});
 				db.close();
-			}else if(result == []){
+			}else if( result == [] ){
 				db.collection('contacts').insert(subscriber, (err, result) => {
 				if(err) {
 					console.log(err);
@@ -131,6 +142,10 @@ app.post('/subscribe', (req, res) => {
 	});
 });
 
+
+/*
+
+
 app.post('/send', (req, res) => {
 	const output = `
 		<p> Yuo have new a new contact request</p>
@@ -149,19 +164,19 @@ app.post('/send', (req, res) => {
 	// NODEMAILER-----------------------------------------------------------------//
 
     // create reusable transporter object using the default SMTP transport
-    let transporter = nodemailer.createTransport({
+    const transporter = nodemailer.createTransport({
         host: 'smtp.ethereal.email',
         port: 587,
         secure: false, // true for 465, false for other ports
         auth: {
         	// якщо не входить, то сгенерувати новий акаунт на сайті
-            user: 'y3qumluwy2owbddh@ethereal.email', // generated ethereal user
-            pass: 'msy3mGCeXmyUb4P7t7'  // generated ethereal password
+            user: 'd2g245pccerqjxjh@ethereal.email', // generated ethereal user
+            pass: 'yMbeNzcfQaRs2ysHeu'  // generated ethereal password
         }
     });
 
     // setup email data with unicode symbols
-    let mailOptions = {
+    const mailOptions = {
         from: `${req.body.senderEmail}`, // sender address
         to: 'yurchuk.dev@gmail.com', // list of receivers
         subject: 'Hire in you', // Subject line
@@ -189,6 +204,12 @@ app.post('/send', (req, res) => {
 });
 // NODEMAILER-----------------------END--------------------------------------//
 
+
+*/
+
+
+
+
 //-------- POST EDITION & ADMIN PANEL  START------//
 
 app.get('/login', (req, res) => {
@@ -206,7 +227,7 @@ app.get('/login', (req, res) => {
 });
 		
 app.post('/login', (req, res) => {
-	let user = {
+	const user = {
 		login: `${req.body.login}`,
 		password: `${req.body.password}`
 	};
@@ -356,7 +377,6 @@ app.get('/delete/:id', (req, res) => {
 		});
 	});
 });
-
 
 app.get('/delete', (req, res) => {
 	if(isAdmin == true){
