@@ -15,7 +15,7 @@ const objectId = require('mongodb').ObjectID;
 const ADMIN = {
 	login: 'admin',
 	password: '8134b84030cca5285ed0e0b31ba06f10'
-}
+};
 // 8134b84030cca5285ed0e0b31ba06f10
 
 //don't forget change to FALSE!!!!!!
@@ -34,6 +34,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', function (req, res) {
+	//console.log(req);
   	MongoClient.connect(urlDB, (err, db) =>{
 		db.collection('posts').find({}).toArray((err, posts) =>{
 			res.render('index', {
@@ -56,7 +57,7 @@ app.get('/index', function (req, res) {
 });
 
 app.get('/single/:id', (req, res) => {
-
+	//console.log(req);
 	const id = new objectId(req.params.id);
 
 	MongoClient.connect(urlDB, (err, db) => {
@@ -93,7 +94,7 @@ app.post('/subscribe', (req, res) => {
 		if(err) {
 			return console.log(err);
 		}
-		var subscriber = {
+		const subscriber = {
 			email: req.body.subscriberEmail
 		};
 		db.collection('contacts').find(subscriber).toArray((err, result) =>{
@@ -102,16 +103,16 @@ app.post('/subscribe', (req, res) => {
 				console.log(err);
 				res.sendStatus(500);
 			} 
-			//test
-			console.log(result);
-			console.log(result.length);
-			// console.log(subscriber);
-			console.log( '*************' );
-			console.log( result != [] );
-			console.log( '*************' );
-			console.log( result == [] );
-			console.log( '*************' );
-			console.log( result === [] );	
+			// //test
+			// console.log(result);
+			// console.log(result.length);
+			// // console.log(subscriber);
+			// console.log( '*************' );
+			// console.log( result != [] );
+			// console.log( '*************' );
+			// console.log( result == [] );
+			// console.log( '*************' );
+			// console.log( result === [] );
 
 			if(Array.isArray(result)&&result.length>0){
 				res.render('subscribe', {
@@ -256,7 +257,7 @@ app.get('/create', (req, res) => {
 
 app.post('/create', (req, res) => {
    const {postTitle, postDescription, postKeyWords, postContent} = req.body;
-   console.log(postTitle, postDescription, postKeyWords, postContent);
+  // console.log(postTitle, postDescription, postKeyWords, postContent);
 
    const onePost = {
       postTitle,
@@ -345,7 +346,7 @@ app.post('/edit/:id', (req, res) => {
              {returnOriginal: false }, (err, result) => {
 
             	if(err) return res.status(400).send();            
-            	 let user = result.value;
+            	let user = result.value;
             	db.close();
             	res.redirect('/posts');
         });
@@ -385,7 +386,7 @@ app.get('/logout', (req, res) => {
 			msg: 'You left on admin panel!',
 			status: false
 	});
-})
+});
 //------- POST EDITION & ADMIN PANEL  END--------//
 
 app.use((req, res, next) => {

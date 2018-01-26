@@ -16,7 +16,7 @@
     <meta name="robots" content="index,follow">
     
     
-    <title>DevBlog - Personal Blog Template</title>
+    <title>Blogg</title>
     
     <!-- Favicon -->
     <link rel="shortcut icon" href="images/favicon/favicon.ico">
@@ -29,7 +29,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     
     <!-- Google Web Fonts  -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,300,500,600,700">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&amp;subset=cyrillic" rel="stylesheet">
     
     
     <!-- HTML5 shiv and Respond.js support IE8 or Older for HTML5 elements and media queries -->
@@ -106,24 +106,23 @@
                               <div class="col-md-12 blog-post">
 <% if (status === true){%>                            	
     <div>
-		<h3>Поздравляем!!!</h3>
-		<p> Вашу почту <code><%= msg %></code>  добавлено в нашу базу рассилки!</p>
-	 	<p> Спасибо за интерес проявленый к нашему блогу! </p>
+		<h3>Congratulations!</h3>
+		<p> Your mail <code><%= msg %></code> is added to our database!</p>
+	 	<p> Thank you for your interest in our blog! </p>
 	</div>
 <% } else if(status === false){ %>
 <div>
-    <h3>Поздравляем!</h3>
-    <p> Ваша почта <code><%= msg %></code> уже есть в нашей базе рассилки!</p>
-    <p> Если вы не получаете от нас письма, проверьте папку Спам! </p>
+    <h3>HEY!</h3>
+    <p> Your mail <code><%= msg %></code>is already in our database!</p>
+    <p> If you do not receive a letter from us, check the Spam folder!  </p>
   </div>
   <% } else {%>
  <div>
-    <p> Что то пошло не так, попробуйте пожже </p>
+    <p> Something went wrong, try again later </p>
 </div> 
 <% } %>
-                        
-                         
-                         </div>
+
+                          </div>
                         </div>
                        </div>
                       </div>
